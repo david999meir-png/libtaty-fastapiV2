@@ -48,7 +48,7 @@ class BookDAL:
                 return cursor.rowcount > 0
     
     @staticmethod
-    def set_available(id: int, val: bool, member_id: int):
+    def set_available(id: int, val: bool, member_id: int | None = None):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
                 sql = """UPDATE books SET is_available = %s ,borrowed_by_member_id = %s WHERE id = %s"""

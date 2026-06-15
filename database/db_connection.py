@@ -8,15 +8,15 @@ def get_connection():
         port=3306,
         user="root",
         password="root",
-        database="librery_db"
+        database="library_db"
     )
 
 
 def create_tables():
     with get_connection() as conn:
-        with conn.cursor as cursor:
+        with conn.cursor() as cursor:
             sql_members = """
-                    CREATE TABLE IF NOT EXIST members(
+                    CREATE TABLE IF NOT EXISTS members(
                     id INT PRIMARY KEY AUTO_INCREMENT,
                     name VARCHAR(50) NOT NULL, 
                     email VARCHAR(255) UNIQUE NOT NULL,
@@ -24,13 +24,14 @@ def create_tables():
                     total_borrows INT DEFAULT 0 NOT NULL
                     )
                     """
-            sql_books = """CREATE TABLE IF NOT EXIST books(
+            sql_books = """
+                        CREATE TABLE IF NOT EXISTS books(
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         title VARCHAR(50) NOT NULL,
                         author VARCHAR(50) NOT NULL,
                         genre ENUM('Fiction', 'NON-Fiction', 'Science', 'History', 'Other') NOT NULL,
-                        is_available BOOLEAN DEFAULT TRUE, NOT NULL,
-                        borrowed_by_member_id INT DEFAULT NULL
+                        is_available BOOLEAN DEFAULT TRUE NOT NULL,
+                        borrowed_by_member_id INT
                         )"""
             cursor.execute(sql_books)
             cursor.execute(sql_members)
