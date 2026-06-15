@@ -88,7 +88,7 @@ class BookDAL:
     def count_by_genre():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
-                sql = """SELECT genre, COUNT(*) AS total FROM books GROUP BY genre"""
+                sql = """SELECT genre AS Genre, COUNT(*) AS Count FROM books GROUP BY genre"""
                 cursor.execute(sql)
 
                 return cursor.fetchall()
