@@ -1,0 +1,9 @@
+import logging
+
+def set_logger():
+    return logging.basicConfig(
+        level=logging.DEBUG,
+        format= "%(asctime)s | %(levelname)s | %(message)s",
+        handlers=[logging.StreamHandler(), logging.FileHandler("logs/app.log")]
+        
+    )

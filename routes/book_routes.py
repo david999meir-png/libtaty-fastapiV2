@@ -22,6 +22,7 @@ router = APIRouter()
 
 @router.get("")
 def get_all_books():
+    logging.info("A request to accept all members has been received.")
     return BookDAL.get_all_bodks()
 
 

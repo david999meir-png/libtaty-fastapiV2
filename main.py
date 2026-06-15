@@ -2,13 +2,10 @@ import logging
 from fastapi import FastAPI
 import uvicorn
 from routes import book_routes, member_routes, report_routes
+from logs.setup_logger import set_logger
 from database import db_connection 
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format= "%(asctime)s | %(levelname)s | %(message)s", 
-    handlers= [logging.StreamHandler(), logging.FileHandler("logs/ app.log")]
-)
+set_logger()
 logger = logging.getLogger(__name__)
 
 db_connection.create_tables()
