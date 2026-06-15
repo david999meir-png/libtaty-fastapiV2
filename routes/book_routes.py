@@ -11,7 +11,7 @@ def get_all_books():
     return BookDAL.get_all_bodks()
 
 
-@router.post("")
+@router.post("", status_code=201)
 def create_books(data):
     pass
 
