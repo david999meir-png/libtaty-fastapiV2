@@ -2,6 +2,7 @@ import logging
 from database.db_connection import get_connection
 
 class BookDAL:
+    @staticmethod
     def create_book(data: dict):
         with get_connection() as conn:
             with conn.cursor() as cursor:
@@ -13,7 +14,7 @@ class BookDAL:
                 cursor.execute(sql, list(data.values()))
                 conn.commit()
                 return cursor.lastrowid
-            
+    @staticmethod
     def get_all_bodks():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -22,6 +23,7 @@ class BookDAL:
 
                 return cursor.fetchall()
     
+    @staticmethod
     def get_book_by_id(id: int):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -29,7 +31,8 @@ class BookDAL:
                 cursor.execute(sql, (id,))
 
                 return cursor.fetchone()
-        
+    
+    @staticmethod
     def update_book(id: int, data: dict):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -43,7 +46,8 @@ class BookDAL:
                 conn.commit()
 
                 return cursor.rowcount > 0
-        
+    
+    @staticmethod
     def set_available(id: int, val: bool, member_id: int):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -53,6 +57,7 @@ class BookDAL:
                 conn.commit()
                 return cursor.rowcount > 0
     
+    @staticmethod
     def count_total_books():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -61,6 +66,7 @@ class BookDAL:
 
                 return cursor.fetchone()
     
+    @staticmethod
     def count_available_books():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -68,7 +74,8 @@ class BookDAL:
                 cursor.execute(sql)
 
                 return cursor.fetchone()
-            
+
+    @staticmethod
     def count_borrowed_books():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -76,7 +83,8 @@ class BookDAL:
                 cursor.execute(sql)
 
                 return cursor.fetchone()
-            
+
+    @staticmethod        
     def count_by_genre():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -84,7 +92,8 @@ class BookDAL:
                 cursor.execute(sql)
 
                 return cursor.fetchall()
-            
+
+    @staticmethod       
     def count_active_borrows_by_member(member_id):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:

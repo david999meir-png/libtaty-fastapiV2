@@ -1,6 +1,7 @@
 from database.db_connection import get_connection
 
 class MemberDAL:
+    @staticmethod
     def create_member(data: dict):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -10,6 +11,7 @@ class MemberDAL:
                 conn.commit()
                 return cursor.lastrowid
 
+    @staticmethod
     def get_all_members():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -18,7 +20,7 @@ class MemberDAL:
 
                 return cursor.fetchall()
             
-    
+    @staticmethod
     def get_member_by_id(id):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -27,6 +29,7 @@ class MemberDAL:
 
                 return cursor.fetchone()
     
+    @staticmethod
     def update_member(id: int, data: dict):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -41,6 +44,7 @@ class MemberDAL:
 
                 return cursor.rowcount > 0
     
+    @staticmethod
     def deactivate_member(id):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -50,6 +54,7 @@ class MemberDAL:
                 conn.commit()
                 return cursor.rowcount > 0
     
+    @staticmethod
     def activate_member(id):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -59,6 +64,7 @@ class MemberDAL:
                 conn.commit()
                 return cursor.rowcount > 0
     
+    @staticmethod
     def increment_borrows(id):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -68,6 +74,7 @@ class MemberDAL:
 
                 return cursor.rowcount > 0
     
+    @staticmethod
     def count_active_members():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
@@ -75,7 +82,8 @@ class MemberDAL:
                 cursor.execute(sql)
 
                 return cursor.fetchone()
-            
+
+    @staticmethod       
     def get_top_member():
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
