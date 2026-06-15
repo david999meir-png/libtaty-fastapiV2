@@ -1,7 +1,7 @@
 import logging
 from fastapi import FastAPI
 import uvicorn
-from routes import book_routes, member_routes
+from routes import book_routes, member_routes, report_routes
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -15,7 +15,7 @@ app = FastAPI()
 
 app.include_router(book_routes.router, prefix="/books", tags=["books"])
 app.include_router(member_routes.router, prefix="/members", tags=["members"])
-
+app.include_router(report_routes.router, prefix="/reports", tags=["reports"])
 
 
 if __name__ == "__main__":

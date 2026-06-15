@@ -85,11 +85,11 @@ class BookDAL:
                 return cursor.fetchone()
 
     @staticmethod        
-    def count_by_genre():
+    def count_by_genre(genre):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
-                sql = """SELECT genre AS Genre, COUNT(*) AS Count FROM books GROUP BY genre"""
-                cursor.execute(sql)
+                sql = """SELECT COUNT(*) FROM books WHERE genre = %s"""
+                cursor.execute(sql, (genre,))
 
                 return cursor.fetchall()
 
