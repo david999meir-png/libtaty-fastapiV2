@@ -88,10 +88,10 @@ class BookDAL:
     def count_by_genre(genre):
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
-                sql = """SELECT COUNT(*) FROM books WHERE genre = %s"""
+                sql = """SELECT COUNT(*) AS total FROM books WHERE genre = %s"""
                 cursor.execute(sql, (genre,))
 
-                return cursor.fetchall()
+                return cursor.fetchone()
 
     @staticmethod       
     def count_active_borrows_by_member(member_id):
@@ -100,6 +100,6 @@ class BookDAL:
                 sql = """SELECT COUNT(*) AS total_member_books
                         FROM books WHERE borrowed_by_member_id = %s"""
                 
-                cursor.execute(sql)
+                cursor.execute(sql, (member_id,))
                 return cursor.fetchone()
             

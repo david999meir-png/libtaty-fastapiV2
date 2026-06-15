@@ -88,10 +88,11 @@ class MemberDAL:
         with get_connection() as conn:
             with conn.cursor(dictionary=True) as cursor:
                 sql = """SELECT * FROM members 
-                        ORDER BY total_borrows DEASC
-                        LINIT 1"""
+                        ORDER BY total_borrows DESC
+                        LIMIT 1"""
                 cursor.execute(sql)
+                top = cursor.fetchone()
 
-                return cursor.fetchone()
+                return top
             
             

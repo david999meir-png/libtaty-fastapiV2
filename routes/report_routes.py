@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Query
 from database import members_db, books_db
+import logging
 
 
 router = APIRouter()
@@ -15,10 +16,11 @@ def get_general_report():
 
 
 @router.get("/books-by-genre")
-def get_books_by_genre(genre = Query(...)):
-    return books_db.BookDAL.count_by_genre(genre)
+def get_books_by_genre(genre: str = Query(...)):
+    return books_db.BookDAL.count_by_genre(genre.title())
 
 
-@router.get("/top-member ")
+@router.get("/top-member")
 def get_top_member():
+    logging.info("A request for Top Member has been received.")
     return members_db.MemberDAL.get_top_member()
